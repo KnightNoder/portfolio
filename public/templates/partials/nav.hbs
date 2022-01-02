@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body,html {
+      height: 100%;
+    }
+
+    div {
+      margin-top: 2px;
+      width: 25%;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+      display: block;
+      width: 100%;
+      padding: 12px 20px;
+    }
+
+    a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+
+    a:hover:not(.active){
+      background-color: #555;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <a href="/">Home</a>
+    <a href="/" class="active">News</a>
+    <a href="/">Contact</a>
+    <a href="/">About</a>
+  </div>
+</body>
+</html>
+
+
+
+
+{{!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body,html {
+      height: 100%;
+      width: 100%;
+    }
+
+    .container {
+      display: flex;
+      width: 20%;
+      height: 100%;
+      background-color: #f1f1f1;
+      flex-direction: column;
+      /* border: solid 1px; */
+      /* animation: heart 1s linear infinite alternate; */
+      /* transition: 1s linear alternate; */
+    }
+
+    a {
+      position: relative;
+      width: 100%;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-size: 30px;
+      color: black;
+    }
+    
+    a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 3px;
+      background-color: black;
+      transition: .3s;
+    }
+
+    a:hover::after {
+      width: 100%;
+    }
+    
+
+    @keyframes heart {
+      0% {
+        border: solid 1px;
+      }
+      100% {
+        border: solid 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/">Home</a>
+    <a href="/">News</a>
+    <a href="/" >Contact</a>
+    <a href="/">About</a>
+  </div>
+</body>
+</html> --}}
