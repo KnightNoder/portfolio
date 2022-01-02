@@ -13,6 +13,9 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/abc', (req, res) => {
+  res.send({ a: 1 });
+});
 app.get('*', (req, res) => {
   res.render('404', {
     error: 'Error:500, Bad request',
