@@ -10,6 +10,11 @@ li {
   float: left;
 }
 
+li.links,
+li > a {
+  font-size: 30px;
+}
+
 li a,
 .dropbtn {
   display: inline-block;
@@ -24,7 +29,8 @@ li a:hover,
   background-color: red;
 }
 
-li.dropdown {
+li.dropdown,
+li.links {
   float: right;
 }
 

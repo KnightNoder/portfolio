@@ -1,17 +1,20 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-}
-
-body {
-  height: 100vh;
-}
 h1 {
   text-align: center;
   margin-top: 350px;
   font-size: 100px;
+  /* animation: rot 5s cubic-bezier(0.785, 0.135, 0.15, 0.86); */
+
+  text-shadow: 2px 4px 8px pink, 2px 4px 16px pink, 2px 4px 32px pink;
+}
+
+@keyframes rot {
+  0% {
+    transform: scale(1, 1) rotateX(0deg);
+  }
+  50% {
+    transform: scale(1.3, 1.3) rotateX(45deg);
+  }
+  100% {
+    transform: scale(1, 1) rotateX(0deg);
+  }
 }
