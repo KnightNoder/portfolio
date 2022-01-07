@@ -5,7 +5,11 @@
 <ul>
   <li><a href="/">Home</a></li>
   <li><a href="/about">About</a></li>
-  <li><a href="/resume">My Resume</a></li>
+  <li><a href="/dashboard" class="dashboard">Dashboard</a></li>
+  <li><a href="/resume" class="resume">My Resume</a></li>
+  <li class="logout" >
+    <a href="/logout" class="dropbtn">Logout</a>
+  </li>
   <li class="links">
     <a href="https://github.com/KnightNoder" target="_blank" class="dropbtn">
       <i class="fab fa-github"></i>
@@ -18,14 +22,33 @@
     </a>
   </li>
   <li class="dropdown">
-    <a style="font-size: 30px;" href="javascript:void(0)" class="dropbtn">Sign in/Register</a>
+    <a href="javascript:void(0)" class="dropbtn">Sign in/Register</a>
     <div class="dropdown-content">
-      <a href="/signin" style="text-align:left;font-size: 20px;display:block;width:225px" >Sign in</a>
+      <a href="/signin" style="text-align:left;font-size: 20px" >Sign in</a>
       <a href="/signup">Register</a>
     </div>
   </li>
 </ul>
 <script>
+
+  console.log("{{token}}", 'token');
+
+  if(!"{{token}}"){
+    const e1 = document.getElementsByClassName('logout');
+    const e2 = document.getElementsByClassName('links');
+    const e3 = document.getElementsByClassName('resume');
+    const e4 = document.getElementsByClassName('dashboard');
+    e1[0].setAttribute('style', 'display:none');
+    e2[0].setAttribute('style', 'display:none');
+    e3[0].setAttribute('style', 'display:none');
+    e4[0].setAttribute('style', 'display:none');
+  }
+
+  if("{{token}}") {
+    const e3 = document.getElementsByClassName('dropdown');
+    e3[0].setAttribute('style', 'display:none');
+  }
+
 </script>
 </body>
 

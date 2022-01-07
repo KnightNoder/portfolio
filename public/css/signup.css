@@ -1,10 +1,11 @@
 .container {
   /* border: solid 1px red; */
   border: none;
+  box-shadow: 1px 1px 3px #ff0084;
   position: absolute;
-  top: 33%;
-  left: 43%;
-  box-shadow: 1px 1px 3px;
+  right: 45%;
+  top: 30%;
+  width: 230px;
 }
 
 .text {
@@ -17,6 +18,7 @@
   padding: 10px;
   margin: 10px;
   width: 200px;
-  background-color: lightgreen;
+  /* background: linear-gradient(#ff0084, #33001b); */
+  background-color: #ff0084;
   border: none;
 }

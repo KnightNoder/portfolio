@@ -2,7 +2,7 @@ h1 {
   text-align: center;
   margin-top: 350px;
   font-size: 100px;
-  /* animation: rot 5s cubic-bezier(0.785, 0.135, 0.15, 0.86); */
+  /* animation: rot 5s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite; */
 
   text-shadow: 2px 4px 8px pink, 2px 4px 16px pink, 2px 4px 32px pink;
 }

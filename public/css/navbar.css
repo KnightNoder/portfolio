@@ -3,7 +3,9 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background: linear-gradient(#ff0084, #33001b);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 li {
@@ -11,8 +13,10 @@ li {
 }
 
 li.links,
-li > a {
-  font-size: 30px;
+li > a,
+.logout a,
+.dropdown a {
+  font-size: 20px;
 }
 
 li a,
@@ -26,11 +30,12 @@ li a,
 
 li a:hover,
 .dropdown:hover .dropbtn {
-  background-color: red;
+  background: linear-gradient(#6441a5, #2a0845);
 }
 
 li.dropdown,
-li.links {
+li.links,
+li.logout {
   float: right;
 }
 
@@ -41,6 +46,7 @@ li.links {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  width: 100px;
 }
 
 .dropdown-content a {
@@ -52,7 +58,7 @@ li.links {
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background: linear-gradient(#2193b0, #6dd5ed);
 }
 
 .dropdown:hover .dropdown-content {

@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
+const DB = process.env.DB || 'mongodb';
+const DB_HOST = process.env.HOST || 'localhost';
+const DB_PORT = process.env.DB_PORT || '27017';
 
+console.log(`${DB}://${DB_HOST}:${DB_PORT}/testApp`);
 mongoose
-  .connect('mongodb://localhost:27017/testApp', {
+  .connect(`${DB}://${DB_HOST}:${DB_PORT}/testApp`, {
+    // .connect(`mongodb://localhost:27017/testApp`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
