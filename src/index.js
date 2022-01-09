@@ -53,8 +53,7 @@ app.get('/dashboard', async (req, res) => {
 
 app.post('/signin', async (req, res) => {
   try {
-    const username = req.body.username;
-    const password = req.body.password;
+    const { username, password } = req.body;
     console.log(req.body, 'req body');
     const user = await User.findOne({ name: username });
     console.log(user, 'found user');
