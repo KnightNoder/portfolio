@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
-const DB = process.env.DB || 'mongodb';
-const DB_HOST = process.env.HOST || 'localhost';
-const DB_PORT = process.env.DB_PORT || '27017';
+
+const DB_URL =
+  process.env.NODE_ENV === 'prod'
+    ? `${process.env.MONGODB_URL}`
+    : `${process.env.DB_URL}`;
+
+console.log(DB_URL, 'db url');
 
 mongoose
-  .connect(
-    `mongodb+srv://lava:password_123@freecluster.siwam.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(`${DB_URL}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log('connection succesfull');
   })
