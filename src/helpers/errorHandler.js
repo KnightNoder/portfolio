@@ -1,7 +1,7 @@
 function error(err, req, res, next) {
   const isLoggedIn = req.session.user ? true : false;
   res.render('404', {
-    token: req.cookies['jwt'],
+    isLoggedOut: !isLoggedIn,
     error: 'Internal server error',
   });
 }
