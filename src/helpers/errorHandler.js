@@ -1,5 +1,5 @@
 function error(err, req, res, next) {
-  res.status(500);
+  const isLoggedIn = req.session.user ? true : false;
   res.render('404', {
     token: req.cookies['jwt'],
     error: 'Internal server error',

@@ -3,16 +3,17 @@ const router = new express.Router();
 const isAuthenticated = require('../middleware/authentication');
 const isAuthorized = require('../middleware/authorization');
 const User = require('../models/user');
+// const redis = require('redis');
+// const redisClient = redis.createClient('6379');
 
 router.get(
-  '/users',
-  //  isAuthenticated,
+  '/api/users',
+  // , isAuthenticated,
   async (req, res) => {
     try {
       const userList = await User.find({});
       console.log(userList, 'user list found');
       res.send(userList);
-      // res.status(200).render('index');2
     } catch (error) {
       console.log(error);
     }
@@ -20,7 +21,7 @@ router.get(
 );
 
 router.get(
-  '/users/:username',
+  '/api/users/:username',
   // isAuthenticated,
   // isAuthorized,
   async (req, res) => {
@@ -37,8 +38,8 @@ router.get(
 );
 
 router.put(
-  '/users/:username',
-  // isAuthenticated,
+  '/api/users/:username',
+  isAuthenticated,
   // isAuthorized,
   async (req, res) => {
     try {
@@ -52,8 +53,8 @@ router.put(
 );
 
 router.post(
-  '/users',
-  //  isAuthenticated,
+  '/api/users',
+  isAuthenticated,
   // isAuthorized,
   async (req, res) => {
     try {
@@ -68,8 +69,8 @@ router.post(
 );
 
 router.delete(
-  '/users/:username',
-  // isAuthenticated,
+  '/api/users/:username',
+  isAuthenticated,
   // isAuthorized,
   async (req, res) => {
     try {

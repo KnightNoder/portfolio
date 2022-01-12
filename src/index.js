@@ -12,9 +12,19 @@ const PORT = process.env.PORT || 3000;
 const bcrypt = require('bcryptjs');
 const isAuthenticated = require('./middleware/authentication');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const exceptionsHandler = require('./helpers/errorHandler');
 const badRequestHandler = require('./helpers/badRequestHandler');
+const axios = require('axios');
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60000 },
+  })
+);
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, '../public/icons/favicon.ico')));
 app.set('view engine', 'hbs');
@@ -25,121 +35,137 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(router);
 
-app.get('/', isAuthenticated, (req, res) => {
-  res.render('index', { token: req.cookies['jwt'] });
+app.get('/', async (req, res) => {
+  try {
+    const loggedIn = req.session.user ? true : false;
+    console.log(loggedIn, 'logged in');
+    // const userFound = await User.findOne({ token: req.cookies['jwt'] });
+    res.render('homepage', { isLoggedOut: !loggedIn, user: req.session.user });
+  } catch (error) {}
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', { token: req.cookies['jwt'] });
+  console.log(req.session.user, 'user in about');
+  const loggedIn = req.session.user ? true : false;
+  res.render('about', { isLoggedOut: !loggedIn, user: req.session.user });
 });
 
 app.get('/signin', (req, res) => {
-  if (req.cookies['jwt']) {
+  // const user = User.findOne({ token: req.cookies['jwt'] });
+  const loggedIn = req.session.user ? true : false;
+  console.log(loggedIn, 'log in val');
+  if (loggedIn) {
     res.redirect('/');
   } else {
-    res.render('signin', { token: req.cookies['jwt'] });
+    res.render('signin', { isLoggedOut: !loggedIn, user: req.session.user });
+  }
+});
+
+app.get('/signup', (req, res) => {
+  console.log(req.session.user, 'user in /signup');
+  const loggedIn = req.session.user ? true : false;
+  res.render('signup', { isLoggedOut: !loggedIn });
+});
+
+app.get('/resume', (req, res) => {
+  const file = path.join(__dirname, '../public/files/atlas-shrugged.pdf');
+  res.download(file);
+});
+
+app.get('/logout', (req, res) => {
+  console.log(req.session.user, 'user in /');
+  try {
+    console.log(req.user, 'req.user ');
+    res.clearCookie('jwt');
+    req.session.destroy((err) => {
+      console.log('req.session destroyed');
+    });
+    res.redirect('/');
+  } catch (error) {
+    // const user = User.findOne({ token: req.cookies['jwt'] });
+    const loggedIn = req.session.user ? true : false;
+    res.send(error, { isLoggedOut: !loggedIn, user: req.session.user });
   }
 });
 
 app.get('/dashboard', async (req, res) => {
-  const userData = await User.find({ token: req.cookies['jwt'] });
-  console.log(userData, 'user data');
-  if (req.cookies['jwt']) {
-    res.render('loggedIn', { user: userData[0], token: req.cookies['jwt'] });
-  } else {
-    res.redirect('/');
+  try {
+    console.log(req.session.user, 'session data in dash');
+    const loggedIn = req.session.user ? true : false;
+    res.render('loggedIn', {
+      user: req.session.user,
+      isLoggedOut: !loggedIn,
+    });
+  } catch (error) {
+    console.log(error, 'caught error in user dashboard');
+    res.redirect('/error');
   }
 });
 
 app.post('/signin', async (req, res) => {
+  const loggedIn = req.session.user ? true : false;
   try {
     const { username, password } = req.body;
-    console.log(req.body, 'req body');
     const user = await User.findOne({ name: username });
-    console.log(user, 'found user');
     if (Object.keys(user).length) {
-      console.log('in user found');
       const match = await bcrypt.compare(password, user.password);
-      console.log(user.password, password, 'compare');
-      console.log(match, 'match');
       if (match) {
-        req.user = user;
-        console.log(req.user, 'req user');
-        let userToken = await user.generateToken();
-        res.cookie('jwt', userToken, {
-          expires: new Date(Date.now() + 300000),
-          // secure: true,
-        });
-        console.log(req.cookies['jwt'], userToken, 'token in post sign in');
-        res.render('loggedIn', { user: user, token: userToken });
+        // let userToken = await user.generateToken();
+        req.session.user = user;
+        console.log(req.session, 'session data');
+        // res.cookie('jwt', userToken, {
+        //   expires: new Date(Date.now() + 300000),
+        //   httpOnly: true,
+        //   secure: true,
+        // });
+        res.redirect('/dashboard');
       } else {
         res.render('404', {
           error: 'Invalid password',
+          isLoggedOut: !loggedIn,
         });
       }
     }
   } catch (err) {
     res.render('404', {
       error: 'Invalid username',
-      token: req.cookies['jwt'],
+      isLoggedOut: !loggedIn,
     });
   }
 });
 
-app.get('/signup', (req, res) => {
-  res.render('signup', { token: req.cookies['jwt'] });
-});
-
 app.post('/signup', async (req, res) => {
+  const loggedIn = req.session.user ? true : false;
   try {
-    const password = req.body.password;
-    const cn_password = req.body.cnf_password;
-    console.log(req.body, 'form body');
-    const role = 'user';
-    if (cn_password === password) {
-      console.log('in if');
-      const newUser = new User({
-        name: req.body.username,
-        password: req.body.password,
-        role: 'user',
-      });
-      console.log(newUser, 'new user');
-      const token = await newUser.generateToken();
-      res.cookie('jwt', token, {
-        expires: new Date(Date.now() + 30000),
-        // httpOnly: true,
-        // secure: true,
-      });
-      const saveUser = await newUser.save();
-      res.render('index', { token: req.cookies['jwt'] });
+    if (loggedIn) {
+      res.redirect('/');
     } else {
-      res.render('404', {
-        error: 'Error:Passwords are not matching',
-        token: req.cookies['jwt'],
-      });
+      const password = req.body.password;
+      const cn_password = req.body.cnf_password;
+      console.log(req.body, 'form body');
+      const role = 'user';
+      if (cn_password === password) {
+        console.log('in if');
+        const newUser = new User({
+          name: req.body.username,
+          password: req.body.password,
+          role: 'user',
+        });
+        console.log(newUser, 'new user');
+        const saveUser = await newUser.save();
+        res.redirect('/');
+      } else {
+        res.render('404', {
+          error: 'Error:Passwords are not matching',
+          isLoggedOut: !loggedIn,
+        });
+      }
     }
   } catch (err) {
     res.render('404', {
       error: err,
-      token: req.cookies['jwt'],
+      isLoggedOut: !loggedIn,
     });
-  }
-});
-
-app.get('/resume', isAuthenticated, (req, res) => {
-  const file = path.join(__dirname, '../public/files/atlas-shrugged.pdf');
-  res.download(file);
-});
-
-app.get('/logout', isAuthenticated, (req, res) => {
-  try {
-    console.log(req.user, 'req.user ');
-    res.clearCookie('jwt');
-    // await req.user.save();
-    console.log('hello');
-    res.redirect('/');
-  } catch (error) {
-    res.send(error, { token: req.cookies['jwt'] });
   }
 });
 

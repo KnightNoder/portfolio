@@ -18,18 +18,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  token: {
-    type: String,
-  },
 });
 
 userSchema.methods.generateToken = async function () {
   try {
     console.log(process.env.SECRET_KEY, 'secret key');
-    const newToken = jwt.sign(
-      { _id: this._id.toString() },
-      process.env.SECRET_KEY
-    );
+    const newToken = jwt.sign(Date.now(), process.env.SECRET_KEY);
     // this.tokens = this.tokens.concat({ token: newToken });
     this.token = newToken;
     console.log(newToken);

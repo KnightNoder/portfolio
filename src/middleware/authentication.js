@@ -6,11 +6,8 @@ const isAuthenticated = async function authentication(req, res, next) {
     const userToken = req.cookies.jwt;
     console.log(userToken, 'usertoken from cookies');
     const user = await User.find({ token: userToken });
-    req.user = user;
-    console.log(req.user, 'req user data');
-    req.token = userToken;
     const verifyUser = jwt.verify(userToken, process.env.SECRET_KEY);
-    if (verifyUser._id) {
+    if (verifyUser) {
       console.log('inside verify');
       next();
     } else {
@@ -20,5 +17,18 @@ const isAuthenticated = async function authentication(req, res, next) {
     res.redirect('/signin');
   }
 };
+
+function isLoggedIn(key) {
+  return new Promise((resolve, reject) => {
+    const userPromise = User.find({ api_key: key });
+    userPromise
+      .then((user) => {
+        resolve(user[0]);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
 
 module.exports = isAuthenticated;

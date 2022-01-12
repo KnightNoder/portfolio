@@ -14,4 +14,3 @@ const a = userList();
 
 console.log(a, 'a');
 
-module.exports = userList;
