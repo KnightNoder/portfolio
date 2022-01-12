@@ -1,4 +1,4 @@
-function error(err, req, res, next) {
+function error(req, res) {
   const isLoggedIn = req.session.user ? true : false;
   res.render('404', {
     isLoggedOut: !isLoggedIn,

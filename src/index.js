@@ -18,7 +18,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60000, secure: true },
+    cookie: { maxAge: 60000 },
   })
 );
 
@@ -32,6 +32,8 @@ app.use(express.urlencoded({ extended: false }));
 const exceptionsHandler = require('./helpers/errorHandler');
 const badRequestHandler = require('./helpers/badRequestHandler');
 app.use(router);
+
+app.use('/error', exceptionsHandler);
 
 app.get('/', async (req, res) => {
   const loggedIn = req.session.user ? true : false;
@@ -166,8 +168,6 @@ app.post('/signup', async (req, res) => {
     });
   }
 });
-
-app.use(exceptionsHandler);
 
 app.get('*', badRequestHandler);
 
