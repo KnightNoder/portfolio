@@ -7,7 +7,7 @@ const User = require('../models/user');
 // const redisClient = redis.createClient('6379');
 
 router.get(
-  '/api/users',
+  '/users',
   // , isAuthenticated,
   async (req, res) => {
     try {
@@ -21,7 +21,7 @@ router.get(
 );
 
 router.get(
-  '/api/users/:username',
+  '/users/:username',
   // isAuthenticated,
   // isAuthorized,
   async (req, res) => {
@@ -38,8 +38,8 @@ router.get(
 );
 
 router.put(
-  '/api/users/:username',
-  isAuthenticated,
+  '/users/:username',
+  // isAuthenticated,
   // isAuthorized,
   async (req, res) => {
     try {
@@ -53,8 +53,8 @@ router.put(
 );
 
 router.post(
-  '/api/users',
-  isAuthenticated,
+  '/users',
+  // isAuthenticated,
   // isAuthorized,
   async (req, res) => {
     try {
@@ -69,13 +69,13 @@ router.post(
 );
 
 router.delete(
-  '/api/users/:username',
-  isAuthenticated,
+  '/users/:username',
+  // isAuthenticated,
   // isAuthorized,
   async (req, res) => {
     try {
       const username = req.params.username;
-      const user = await User.deleteOne({ name: username });
+      await User.deleteOne({ name: username });
       res.status(200).send('Ok');
     } catch (error) {
       console.log(error);
