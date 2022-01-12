@@ -5,7 +5,7 @@
 <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<ul>
+<ul class="navbar">
   <li><a href="/">Home</a></li>
   <li><a href="/about">About</a></li>
   <li><a href="/dashboard" class="dashboard">Dashboard</a></li>
@@ -33,7 +33,7 @@
   </li>
 </ul>
 <script>
-  const a = true;
+  const a = {{isLoggedOut}} ? true : false;
   if(a){
     const e1 = document.getElementsByClassName('logout');
     const e2 = document.getElementsByClassName('links');

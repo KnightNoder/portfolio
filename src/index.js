@@ -11,9 +11,7 @@ const favicon = require('serve-favicon');
 const PORT = process.env.PORT || 3000;
 const bcrypt = require('bcryptjs');
 // const isAuthenticated = require('./middleware/authentication');
-const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const axios = require('axios');
 
 app.use(
   session({
@@ -24,7 +22,6 @@ app.use(
   })
 );
 
-app.use(cookieParser());
 app.use(favicon(path.join(__dirname, '../public/icons/favicon.ico')));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '../public/templates/views'));
