@@ -34,8 +34,8 @@ const badRequestHandler = require('./helpers/badRequestHandler');
 app.use(router);
 
 app.get('/', async (req, res) => {
+  const loggedIn = req.session.user ? true : false;
   try {
-    const loggedIn = req.session.user ? true : false;
     console.log(loggedIn, 'logged in');
     // const userFound = await User.findOne({ token: req.cookies['jwt'] });
     res.render('homepage', { isLoggedOut: !loggedIn, user: req.session.user });
@@ -72,6 +72,7 @@ app.get('/resume', (req, res) => {
 
 app.get('/logout', (req, res) => {
   console.log(req.session.user, 'user in /');
+  const loggedIn = req.session.user ? true : false;
   try {
     console.log(req.user, 'req.user ');
     res.clearCookie('jwt');
@@ -81,15 +82,14 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
   } catch (error) {
     // const user = User.findOne({ token: req.cookies['jwt'] });
-    const loggedIn = req.session.user ? true : false;
     res.send(error, { isLoggedOut: !loggedIn, user: req.session.user });
   }
 });
 
 app.get('/dashboard', async (req, res) => {
+  const loggedIn = req.session.user ? true : false;
   try {
     console.log(req.session.user, 'session data in dash');
-    const loggedIn = req.session.user ? true : false;
     res.render('loggedIn', {
       user: req.session.user,
       isLoggedOut: !loggedIn,
