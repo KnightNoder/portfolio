@@ -3,6 +3,7 @@ require('./db/conn');
 
 const express = require('express');
 const app = express();
+const User = require('../src/models/user');
 const router = require('./routers/users');
 const path = require('path');
 const hbs = require('hbs');
@@ -23,9 +24,6 @@ app.use(
   })
 );
 
-const exceptionsHandler = require('./helpers/errorHandler');
-const User = require('../src/models/user');
-const badRequestHandler = require('./helpers/badRequestHandler');
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, '../public/icons/favicon.ico')));
 app.set('view engine', 'hbs');
@@ -34,6 +32,8 @@ hbs.registerPartials(path.join(__dirname, '../public/templates/partials'));
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+const exceptionsHandler = require('./helpers/errorHandler');
+const badRequestHandler = require('./helpers/badRequestHandler');
 app.use(router);
 
 app.get('/', async (req, res) => {
