@@ -10,11 +10,9 @@ const hbs = require('hbs');
 const favicon = require('serve-favicon');
 const PORT = process.env.PORT || 3000;
 const bcrypt = require('bcryptjs');
-const isAuthenticated = require('./middleware/authentication');
+// const isAuthenticated = require('./middleware/authentication');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const exceptionsHandler = require('./helpers/errorHandler');
-const badRequestHandler = require('./helpers/badRequestHandler');
 const axios = require('axios');
 
 app.use(
@@ -25,6 +23,9 @@ app.use(
     cookie: { maxAge: 60000 },
   })
 );
+
+const exceptionsHandler = require('./helpers/errorHandler');
+const badRequestHandler = require('./helpers/badRequestHandler');
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, '../public/icons/favicon.ico')));
 app.set('view engine', 'hbs');
