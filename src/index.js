@@ -1,6 +1,5 @@
 require('dotenv').config({ path: '.env' });
 require('./db/conn');
-const User = require('../src/models/user');
 
 const express = require('express');
 const app = express();
@@ -25,6 +24,7 @@ app.use(
 );
 
 const exceptionsHandler = require('./helpers/errorHandler');
+const User = require('../src/models/user');
 const badRequestHandler = require('./helpers/badRequestHandler');
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, '../public/icons/favicon.ico')));
