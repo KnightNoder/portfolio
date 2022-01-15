@@ -20,19 +20,19 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.methods.generateToken = async function () {
-  try {
-    console.log(process.env.SECRET_KEY, 'secret key');
-    const newToken = jwt.sign(Date.now(), process.env.SECRET_KEY);
-    // this.tokens = this.tokens.concat({ token: newToken });
-    this.token = newToken;
-    console.log(newToken);
-    await this.save();
-    return newToken;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// userSchema.methods.generateToken = async function () {
+//   try {
+//     console.log(process.env.SECRET_KEY, 'secret key');
+//     const newToken = jwt.sign(Date.now(), process.env.SECRET_KEY);
+//     // this.tokens = this.tokens.concat({ token: newToken });
+//     this.token = newToken;
+//     console.log(newToken);
+//     await this.save();
+//     return newToken;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {

@@ -2,32 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="app" content="fun">
+  <meta name="theme-color" content="#317EFB"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>
+  <title>Portfolio App</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="../../icons/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../icons/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="../../../src/site.webmanifest">
   <link rel="stylesheet" href="../../css/signup.css">
   <link rel="stylesheet" href="../../css/index.css">
 </head>
 <body>
   {{>navbar2}}
+  <div class="form-container">
   <div class="container">
     <form action="/signin" method="post">
       <br>
-      <label for="" style="margin-left:10px">Name</label>
+      <label for="username" style="margin-left:10px">Name</label>
       <br>
-      <input type="text" class="text" name="username">
+      <input type="text" id="username" class="text" name="username" autocomplete ="off" required minlength="4" spellcheck="false">
       <br>
-      <label for="" style="margin-left:10px;">Password</label>
+      <label for="password" style="margin-left:10px;">Password</label>
       <br>
-      <input type="password " class="text" name="password">
+      <input type="password" id="password" class="text" name="password" autocomplete ="off" required spellcheck="false"> 
+      <i onclick="hide()" class="fas fa-eye-slash" id="slash" style="transform: translateY(-36px) translateX(172px);cursor:pointer"></i>
       <br>
       <button type="submit" id="submit">Submit</button>
     </form>
   </div>
+  <a id="submit1" href="{{loginWithGoogleLink}}">
+    <i class="fab fa-google">
+    </i> 
+    Login
+  </a>
+  <a id="submit2" href="{{loginWithGithubLink}}">
+    <i class="fab fa-github" >          
+    </i>
+    Login
+  </a>
+  </div>
+  <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>
+  <script>
 
-  {{>footer}}
+    function hide(){
+      const icon =  document.getElementById('slash')
+      icon.classList.toggle('fa-eye-slash')
+      icon.classList.toggle('fa-eye')
+      const password = document.getElementById('password')
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+    }
 
-
+  </script>
 </body>
 </html>

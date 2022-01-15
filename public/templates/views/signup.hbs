@@ -4,79 +4,46 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>
+  <meta http-equiv="Cache-control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv='Pragma', content='no-cache'>
+  <meta http-equiv='Expires', content='-1'>
+  <title>Portfolio App</title>
   <link rel="stylesheet" href="../../css/signup.css">
   <link rel="stylesheet" href="../../css/index.css">
 </head>
 <body>
   {{>navbar2}}
+  <div class="form-container">
   <div class="container">
     <form action="/signup" method="post">
       <br>
       <label for="" style="margin-left:10px">Name</label>
       <br>
-      <input type="text" class="text" name="username">
+      <input type="text" class="text" name="username" autocomplete="off" autocapitalize="words" required minlength="4" spellcheck="false">
       <br>
       <label for="" style="margin-left:10px;">Password</label>
       <br>
-      <input type="password " class="text" name="password">
+      <input type="password" id="password" class="text" name="password" required minlength="1" spellcheck="false"><i onclick="hide('password','slash1')" class="fas fa-eye-slash" id="slash1" style="transform: translateY(-36px) translateX(172px) ;cursor:pointer"></i>
       <br>
       <label for="" style="margin-left:10px;">Confirm password</label>
       <br>
-      <input type="password" class="text" name="cnf_password">
+      <input type="password" class="text" id="cnf_password" name="cnf_password" autocomplete="off" required minlength="1"><i onclick="hide('cnf_password','slash2')" class="fas fa-eye-slash" id="slash2" style="transform: translateY(-36px) translateX(172px);cursor:pointer"></i>
       <br>
       <button type="submit" id="submit">Submit</button>
     </form>
   </div>
-  {{>footer}}
-
-
-    <div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <h2>Modal Header</h2>
-    </div>
-    <div class="modal-body">
-      <p>Some text in the Modal Body</p>
-      <p>Some other text...</p>
-    </div>
-    <div class="modal-footer">
-      <h3>Modal Footer</h3>
-    </div>
-  </div>
-
 </div>
-  {{!-- <div class="xyz"></div> --}}
-    <script>
-    // Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("submit");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+  <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>
+  <script>
+    function hide(element,eye){
+      console.log(element,'ele');
+      const icon =  document.getElementById(eye)
+      icon.classList.toggle('fa-eye-slash')
+      icon.classList.toggle('fa-eye')
+      const password = document.getElementById(element)
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+    }
   </script>
 </body>
 </html>

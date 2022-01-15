@@ -29,7 +29,7 @@ router.get(
       const username = req.params.username;
       const user = await User.find({ name: username });
       console.log(user, 'user found');
-      res.send(user);
+      return user;
       // res.render('index', { user: user[0].name });
     } catch (error) {
       console.log(error);

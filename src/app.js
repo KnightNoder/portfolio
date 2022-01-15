@@ -89,6 +89,5 @@ async function getAccessTokenFromCode() {
       code,
     },
   });
-  console.log(data, 'data from axios'); // { access_token, expires_in, token_type, refresh_token }
   return data.access_token;
 }

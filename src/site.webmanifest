@@ -1,0 +1,28 @@
+{
+  "short_name": "Portfolio",
+  "name": "Portfolio app",
+  "icons": [
+    {
+      "src": "public/icons/favicon_io/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "public/icons/favicon_io/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#f1f1f1",
+  "display": "fullscreen",
+  "scope": "/",
+  "theme_color": "#3367D6",
+  "shortcuts": [
+  ],
+  "description": "Developer information",
+  "screenshots": [
+  ]
+}
