@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="../../css/navbar.css">
 <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/navbar.css">
 </head>
 <body>
 <ul class="navbar">
-  <li><a href="/">Home</a></li>
-  <li><a href="/about">About</a></li>
-  <li><a href="/dashboard" class="dashboard">Dashboard</a></li>
-  <li><a href="/resume" class="resume">My Resume</a></li>
-  <li class="logout" >
-    <a href="/logout" class="dropbtn">Logout</a>
-  </li>
+  <li class="underline bounce" style="margin-left: 2px;"><a href="/homepage">Home</a></li>
+  <li class="underline bounce" ><a href="/about">Contact me</a></li>
+  <li class="underline bounce"><a href="/dashboard" class="dashboard">Dashboard</a></li>
+  <li class="underline bounce"><a href="/resume" class="resume">My Resume</a></li>
   <li class="links">
-    <a href="https://github.com/KnightNoder" target="_blank" class="dropbtn">
+    <a href="https://github.com/KnightNoder" target="_blank" rel="noopener"  aria-label="github" class="dropbtn bounce">
       <i class="fab fa-github"></i>
     </a>
-    <a href="https://twitter.com/iamanthe" target="_blank" class="dropbtn">
-      <i class="fab fa-twitter"></i>
-    </a>
-    <a href="https://www.linkedin.com/in/lava-kumar-1a3a7a15/" target="_blank" class="dropbtn">
+    <a href="https://www.linkedin.com/in/lava-kumar-1a3a7a15/" target="_blank" rel="noopener" class="dropbtn bounce" 
+    aria-label="linkedin">
       <i class="fab fa-linkedin"></i>
     </a>
+    <a  href="/logout" class="dropbtn logout underline bounce">Logout</a>
   </li>
+  {{!-- <li class="logout underline bounce" >
+  </li> --}}
   <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn">Sign in/Register</a>
+    <a href="javascript:void(0)" class="dropbtn">Sign in / Register</a>
     <div class="dropdown-content">
-      <a href="/signin" style="text-align:left;font-size: 20px" >Sign in</a>
-      <a href="/signup">Register</a>
+      <a href="/signin" style="text-align: center;" >Sign in</a>
+      <a href="/signup" style="text-align: center;">&nbsp;Register</a>
     </div>
   </li>
 </ul>
