@@ -4,37 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-
-    div,span {
-      font-size: 200px;
-      display: inline-block;
-      letter-spacing: .1px;
-    }
-    .one,.four {
-      color: dodgerblue;
-    }
-    .two,.six {
-      color: red;
-    }
-    .three{
-      color: yellow;
-    }
-    .five {
-      color: green;
-    }
-    .six {
-      transform: rotateZ(-40deg);
-    }
-  </style>
+  <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>
   <title>Document</title>
 </head>
 <body>
-  <span class="one">G</span>
-  <span class="two">o</span>
-  <span class="three">o</span>
-  <span class="four">g</span>
-  <span class="five">l</span>
-  <div class="six">e</div>
+  <form method="post">
+    Username
+    <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" required="" id="id_username">
+    Password
+    <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+    <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
 </body>
 </html>

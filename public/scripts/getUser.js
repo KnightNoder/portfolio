@@ -17,3 +17,15 @@ async function getUsersList() {
     console.log(err, 'error on click button');
   }
 }
+
+const GetJoke = async () => {
+  const resp = await axios.get(`${GET_JOKE_URL}`);
+  if (resp.data.setup && resp.data.delivery) {
+    document.getElementById('first_line').innerHTML = resp.data.setup;
+    document.getElementById('second_line').innerHTML = resp.data.delivery;
+  }
+};
+
+setInterval(() => {
+  GetJoke();
+}, 10000);

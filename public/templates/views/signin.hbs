@@ -22,11 +22,12 @@
       <br>
       <label for="username" style="margin-left:10px">Name</label>
       <br>
-      <input type="text" id="username" class="text" name="username" autocomplete ="off" required minlength="4">
+      <input type="text" id="username" class="text" name="username" autocomplete ="off" required minlength="4" spellcheck="false">
       <br>
       <label for="password" style="margin-left:10px;">Password</label>
       <br>
-      <input type="password" id="password" class="text" name="password" autocomplete ="off" required>
+      <input type="password" id="password" class="text" name="password" autocomplete ="off" required spellcheck="false"> 
+      <i onclick="hide()" class="fas fa-eye-slash" id="slash" style="transform: translateY(-36px) translateX(172px);cursor:pointer"></i>
       <br>
       <button type="submit" id="submit">Submit</button>
     </form>
@@ -43,5 +44,17 @@
   </a>
   </div>
   <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>
+  <script>
+
+    function hide(){
+      const icon =  document.getElementById('slash')
+      icon.classList.toggle('fa-eye-slash')
+      icon.classList.toggle('fa-eye')
+      const password = document.getElementById('password')
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+    }
+
+  </script>
 </body>
 </html>

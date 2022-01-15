@@ -13,19 +13,20 @@
 <body>
   {{>navbar2}}
   {{!-- Hello {{name}}/ --}}
-  <button style="width: 100px;height:20px;margin:20px" onclick="getUsersList()">User list</button>
+  {{!-- <button style="width: 100px;height:20px;margin:20px" onclick="getUsersList()">User list</button>
   <button style="width: 100px;height:20px;margin:20px" onclick="getUsersList()"> User details</button>
   <button style="width: 100px;height:20px;margin:20px" onclick="getUsersList()">Edit user</button>
-  <button style="width: 100px;height:20px;margin:20px" onclick="getUsersList()">Delete user</button>
-  <div class="content">
-  <p>Hello {{user.name}}</p>
-  <ul id="demo"></ul>
-  <br>
-  <p>welcome to my page</p>
-  <br>
-  <p>You have succesfully wasted your time here</p>
-  <p id="slideContainer"></p>
+  <button style="width: 100px;height:20px;margin:20px" onclick="getUsersList()">Delete user</button> --}}
+  <div style="text-align: center; margin:100px">
+  <h3>Hello {{user.name}}</h3>
+  {{!-- <p>welcome to my page</p>
+  <p>You have succesfully wasted your time here</p> --}}
   </div>
+
+<div>
+  <p id="first_line"></p><br>
+  <p id="second_line"></p>
+</div>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="../../scripts/getUser.js"></script>
   <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>

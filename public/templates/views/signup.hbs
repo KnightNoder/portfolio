@@ -19,20 +19,31 @@
       <br>
       <label for="" style="margin-left:10px">Name</label>
       <br>
-      <input type="text" class="text" name="username" autocomplete="off" autocapitalize="words" required minlength="4">
+      <input type="text" class="text" name="username" autocomplete="off" autocapitalize="words" required minlength="4" spellcheck="false">
       <br>
       <label for="" style="margin-left:10px;">Password</label>
       <br>
-      <input type="password" class="text" name="password" required minlength="1" >
+      <input type="password" id="password" class="text" name="password" required minlength="1" spellcheck="false"><i onclick="hide('password','slash1')" class="fas fa-eye-slash" id="slash1" style="transform: translateY(-36px) translateX(172px) ;cursor:pointer"></i>
       <br>
       <label for="" style="margin-left:10px;">Confirm password</label>
       <br>
-      <input type="password" class="text" name="cnf_password" autocomplete="off" required minlength="1">
+      <input type="password" class="text" id="cnf_password" name="cnf_password" autocomplete="off" required minlength="1"><i onclick="hide('cnf_password','slash2')" class="fas fa-eye-slash" id="slash2" style="transform: translateY(-36px) translateX(172px);cursor:pointer"></i>
       <br>
       <button type="submit" id="submit">Submit</button>
     </form>
   </div>
 </div>
   <script src="https://kit.fontawesome.com/a342ac4253.js" crossorigin="anonymous"></script>
+  <script>
+    function hide(element,eye){
+      console.log(element,'ele');
+      const icon =  document.getElementById(eye)
+      icon.classList.toggle('fa-eye-slash')
+      icon.classList.toggle('fa-eye')
+      const password = document.getElementById(element)
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+    }
+  </script>
 </body>
 </html>
